@@ -1,4 +1,10 @@
 {
     "userspace_version": "1.0",
-    "build_targets": []
+    "build_targets": [
+        ["splitkb/aurora/sofle_v2/rev1", "kaito_spkb_soflev2"],
+        ["splitkb/aurora/lily58/rev1", "kaito_spkb_lily58"],
+        ["klor", "kaito_klor"],
+        ["wuque/ikki68", "kaito_ikki68"],
+        ["gray_studio/apollo80", "kaito_apollo80"]
+    ]
 }
