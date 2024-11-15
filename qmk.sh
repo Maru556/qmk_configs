@@ -61,6 +61,22 @@ get_next_version_number() {
     echo $((version + 1))
 }
 
+# Function to add lines to keymap.c
+add_lines_to_keymap() {
+    local keymap_file="$1"
+
+    # Add lines you want to insert here
+    cat <<EOL >> "$keymap_file"
+#include QMK_KEYBOARD_H
+
+void keyboard_pre_init_user(void) {
+    setPinOutput(24);
+    writePinHigh(24);
+}
+EOL
+    echo "Added custom lines to $keymap_file"
+}
+
 # Main script
 read -p "Enter name: " name
 read -p "Enter converter: " convert_to
@@ -118,6 +134,9 @@ if [[ ! -f "$keymap_path" ]]; then
     echo "Check if the input file is valid: $target_file"
     exit 1
 fi
+
+# Add custom lines to keymap.c
+add_lines_to_keymap "$keymap_path"
 
 # Compile the firmware
 compile_command="qmk compile -e CONVERT_TO=$convert_to -kb $keyboard_name -km ${name}_kaito"
